@@ -1,0 +1,11 @@
+commit 83c95d7e4e1016dc6a6baf67ae0af383bf56400f
+Author: Kenny <oseleonose@gmail.com>
+Date:   Mon Jan 27 21:26:14 2020 -0500
+
+    *poor Ron* homework 0 files
+
+commit 85344662b10c701c2aa67df107377e350057430b
+Author: Kenny <oseleonose@gmail.com>
+Date:   Mon Jan 27 20:32:20 2020 -0500
+
+    updated README
