@@ -11,6 +11,7 @@ int main(void)
 	float number;
 	char operator;
 	int errorIdentifier = 0;
+	int userHadInput = NO;
 
 	printf("Please enter an arithmetic expression using * and / only:\n");
 
@@ -20,6 +21,10 @@ int main(void)
 		{
 			printf(" \nmalformed expression\n");
 			return 1;
+		}
+		else
+		{
+			userHadInput = YES;
 		}
 
 		if (willMultiplyNext)
@@ -49,5 +54,12 @@ int main(void)
 		}
 	}
 
-	printf("\n%f\n", resultSoFar);
+	if (!userHadInput)
+	{
+		printf("malformed expression\n");
+	}
+	else
+	{
+		printf("\n%f\n", resultSoFar);
+	}
 }
