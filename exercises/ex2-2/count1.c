@@ -29,11 +29,14 @@ int main() {
     int rci = 0;  //index into reverse complement array
 
     // TODO: set the value of rev_comp[rci] for every valid index
-
-
-
+    for (int i = dna_len; i >= 0; --i)
+    {
+	    rev_comp[rci] = dna[i];
+	    rci++;
+    }
 
     // TODO: add the null character to the end of rev_comp
+    rev_comp[-1] = '\0';
 
 
 
