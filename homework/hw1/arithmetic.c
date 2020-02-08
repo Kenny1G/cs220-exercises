@@ -7,43 +7,42 @@
 int main(void)
 {
 	int willMultiplyNext = YES;
-	int isNumberExpected = YES;
 	float resultSoFar = 1.0f;
-	float number = 0.0f;
-	char operator = 'c';
-	while (scanf(" %f %c ", &number, &operator) != EOF)
+	float number;
+	char operator;
+	int errorIdentifier = 0;
+
+	printf("Please enter an arithmetic expression using * and / only:\n");
+
+	while (( errorIdentifier = scanf(" %f %c ", &number, &operator)) != EOF)
 	{
-		if (isNumberExpected)
+
+		if (willMultiplyNext)
 		{
-			if (willMultiplyNext)
-				resultSoFar *= number;
+			resultSoFar *= number;
+		}
+		else
+		{
+			if (number != 0)
+			{
+				resultSoFar /= number;
+			}
 			else
 			{
-				if (number != 0)
-					resultSoFar /= number;
-				else
-				{
-					printf("\ndivision by zero");
-					return 2;
-				}
+				printf("division by zero\n");
+				return 2;
 			}
-			isNumberExpected = NO;
 		}
-		else if (operator== '*' && isNumberExpected == NO)
+
+		if (operator== '*')
 		{
 			willMultiplyNext = YES;
-			isNumberExpected = YES;
 		}
-		else if (operator== '/' && isNumberExpected == NO)
+		else if (operator== '/')
 		{
 			willMultiplyNext = NO;
-			isNumberExpected = YES;
-		}
-		else if ( (operator == '/' || operator == '*') && isNumberExpected == YES)
-		{
-			printf("\nmalformed expression");
-			return 1;
 		}
 	}
-	printf("\n%f", resultSoFar);
+
+	printf("\n%f\n", resultSoFar);
 }
