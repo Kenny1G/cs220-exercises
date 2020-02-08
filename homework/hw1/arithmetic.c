@@ -39,7 +39,7 @@ int main(void)
 			}
 			else
 			{
-				printf("division by zero\n");
+				printf("\ndivision by zero\n");
 				return 2;
 			}
 		}
@@ -51,6 +51,14 @@ int main(void)
 		else if (operator== '/')
 		{
 			willMultiplyNext = NO;
+		}
+		else
+		{
+			if (errorIdentifier != 1)
+			{
+				printf("\nmalformed expression\n");
+				return 1;
+			}
 		}
 	}
 
