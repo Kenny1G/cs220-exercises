@@ -16,6 +16,11 @@ int main(void)
 
 	while (( errorIdentifier = scanf(" %f %c ", &number, &operator)) != EOF)
 	{
+		if (errorIdentifier == 0)
+		{
+			printf(" \nmalformed expression\n");
+			return 1;
+		}
 
 		if (willMultiplyNext)
 		{
