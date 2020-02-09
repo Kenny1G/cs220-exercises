@@ -8,23 +8,20 @@ int main(void)
 {
 	int willMultiplyNext = YES;
 	float resultSoFar = 1.0f;
-	float number;
-	char operator;
-	int errorIdentifier = 0;
-	int userHadInput = NO;
+	int numOfUserInput = 0;
 
 	printf("Please enter an arithmetic expression using * and / only:\n");
 
-	while (( errorIdentifier = scanf(" %f %c ", &number, &operator)) != EOF)
+	float number;
+	char operator;
+	int iRet;
+	while (( iRet = scanf(" %f %c ", &number, &operator)) != EOF)
 	{
-		if (errorIdentifier == 0)
+		numOfUserInput = iRet;
+		if (numOfUserInput == 0)
 		{
 			printf(" \nmalformed expression\n");
 			return 1;
-		}
-		else
-		{
-			userHadInput = YES;
 		}
 
 		if (willMultiplyNext)
@@ -54,7 +51,7 @@ int main(void)
 		}
 		else
 		{
-			if (errorIdentifier != 1)
+			if (numOfUserInput != 1)
 			{
 				printf("\nmalformed expression\n");
 				return 1;
@@ -62,9 +59,9 @@ int main(void)
 		}
 	}
 
-	if (!userHadInput)
+	if ( numOfUserInput != 1)
 	{
-		printf("malformed expression\n");
+		printf("\nmalformed expression\n");
 	}
 	else
 	{
