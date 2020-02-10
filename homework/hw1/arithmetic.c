@@ -4,10 +4,12 @@
 
 #define YES 1
 #define NO 0
+
+// Takes an arbitrary number of numbers and operations from user and perfoms calculations
 int main(void)
 {
 	int willMultiplyNext = YES;
-	float resultSoFar = 1.0f;
+	float resultSoFar = 1.00f;
 	int numOfUserInput = 0;
 
 	printf("Please enter an arithmetic expression using * and / only:\n");
@@ -20,7 +22,7 @@ int main(void)
 		numOfUserInput = iRet;
 		if (numOfUserInput == 0)
 		{
-			printf(" \nmalformed expression\n");
+			printf("malformed expression\n");
 			return 1;
 		}
 
@@ -36,7 +38,7 @@ int main(void)
 			}
 			else
 			{
-				printf("\ndivision by zero\n");
+				printf("division by zero\n");
 				return 2;
 			}
 		}
@@ -53,7 +55,7 @@ int main(void)
 		{
 			if (numOfUserInput != 1)
 			{
-				printf("\nmalformed expression\n");
+				printf("malformed expression\n");
 				return 1;
 			}
 		}
@@ -61,10 +63,10 @@ int main(void)
 
 	if ( numOfUserInput != 1)
 	{
-		printf("\nmalformed expression\n");
+		printf("malformed expression\n");
 	}
 	else
 	{
-		printf("\n%f\n", resultSoFar);
+		printf("%f\n", resultSoFar);
 	}
 }
