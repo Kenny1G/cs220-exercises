@@ -102,6 +102,7 @@ int main(int argc, char *argv[]) {
     //       format string.  Print ci_annual, ci_monthly
     //       then ci_cont.
     fprintf(output, "%0.2f %0.2f %0.2f\n", ci_annual, ci_monthly, ci_cont); 
+    parse = fscnf(input, "%f %f ", &p, & r);
   }
 
   // TODO: return non-0 if error prevented us from completing
