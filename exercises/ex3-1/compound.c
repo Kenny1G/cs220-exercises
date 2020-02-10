@@ -25,12 +25,12 @@ float compound_interest(float p, float r, int n) {
 
   if(n > 0) {
     // TODO: Compute and return compound interest
-    amount = p * pow((1 + (r/n)),n*t);
-    return amount;
+    amount = p * pow((1 + (r/n)),n);
   } else {
     // TODO: Compute and return continuously compounded interest
-    //
+    amount = p * exp(r);
   }
+  return amount;
 }
 
 int main(int argc, char *argv[]) {
@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
     //       using "%0.2f %0.2f %0.2f\n" as the fprintf
     //       format string.  Print ci_annual, ci_monthly
     //       then ci_cont.
-    fprintf(output, "%0.2f %0.2f 0.2f\n", ci_annual, ci_monthly, ci_cont); 
+    fprintf(output, "%0.2f %0.2f %0.2f\n", ci_annual, ci_monthly, ci_cont); 
   }
 
   // TODO: return non-0 if error prevented us from completing
@@ -121,8 +121,6 @@ int main(int argc, char *argv[]) {
   // TODO: close both input and output using fclose
   fclose(input);
   fclose(output);
-
-
 
   return 0;
 }
