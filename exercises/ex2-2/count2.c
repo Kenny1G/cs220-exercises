@@ -25,6 +25,23 @@ int main() {
     // Optional challenge: instead of using isalpha, isdigit and
     // isspace, use relational operators and your knowledge of the
     // characters' ASCII values: http://www.asciitable.com
+    char cRet;
+    for (int i = 0; i < text_len; ++i)
+    {
+        cRet = text[i];
+        if ((cRet >= 'a' && cRet <= 'z') || (cRet >= 'A' && cRet <= 'Z'))
+        {
+            num_alpha++;
+        }
+        else if (cRet >= 48 && cRet <= 57)
+        {
+            num_digits++;
+        }
+        else if (cRet == 32)
+        {
+            num_space++;
+        }
+    }
 
 
     
