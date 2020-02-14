@@ -1,7 +1,7 @@
 # Sample Makefile
 
 CC=gcc
-CFLAGS=-std=c99 -pedantic -Wall -Wextra
+CFLAGS=-std=c99 -pedantic -Wall -Wextra -g
 
 # Links together files needed to create executable
 main: main_file.o functions.o
