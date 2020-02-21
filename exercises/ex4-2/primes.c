@@ -32,7 +32,10 @@ int *pairwise_sum(int *array, int length) {
     }
     // do the pairwise sum into "fresh"
     for (int i = 0; i < length; i++) {
-        fresh[i] = array[i] + array[i+1];
+        if (i != length -1)
+        {
+            fresh[i] = array[i] + array[i+1];
+        }
     }
     return fresh;
 }
