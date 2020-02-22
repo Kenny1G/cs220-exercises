@@ -2,3 +2,5 @@
 *.vscode
 gitlog.txt
 *.zip
+object_files/
+bin/
