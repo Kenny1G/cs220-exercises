@@ -14,10 +14,10 @@ hw3.o: hw3.c dnasearch.h
 	$(CC) $(FLAGS) -c hw3.c -o hw3.o
 
 test_dnasearch: test_dnasearch.o dnasearch.o 
-	$(CC) -o test_dnasearch 
+	$(CC) test_dnasearch.o dnasearch.o -o test_dnasearch 
 
 dnasearch.o: dnasearch.c dnasearch.h 
-	$(CC) $(FLAGS_) -c dnasearch.c
+	$(CC) $(FLAGS) -c dnasearch.c
 
 test_dnasearch.o: test_dnasearch.c dnasearch.h
 	$(CC) $(FLAGS) -c test_dnasearch.c

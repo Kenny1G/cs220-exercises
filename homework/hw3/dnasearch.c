@@ -5,6 +5,10 @@
 #include "dnasearch.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+//TODO: change this to return an int instead and pass an array
+// into it where it'll copy the characters to.
 
 char* parse_file(const char* filename)
 {
@@ -22,8 +26,9 @@ char* parse_file(const char* filename)
 
     char cRet;
     int iRet = fscanf(fileptr, " %c ", &cRet);
+    int i = 0;
     while (iRet != EOF)
-    {
+    { 
         switch(cRet)
         {
             case 'A':
@@ -34,13 +39,16 @@ char* parse_file(const char* filename)
             case 'g':
             case 'T':
             case 't':
-            memcpy(file_array++, &cRet, sizeof(char));
+                file_array[i] = cRet;
+                ++i;
+                break;
             default:
                 printf("Invalid text \n");
                 return 2;
         }
-        iRet = fscanf(fileptr, " %c ", ++file_array);
+        iRet = fscanf(fileptr, " %c ", &cRet);
     }
 
+    fclose(fileptr);
     return file_array;
 }
