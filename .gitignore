@@ -4,3 +4,4 @@ gitlog.txt
 *.zip
 object_files/
 bin/
+*.o
