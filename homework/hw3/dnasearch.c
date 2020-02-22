@@ -10,13 +10,8 @@
 //TODO: change this to return an int instead and pass an array
 // into it where it'll copy the characters to.
 
-char* parse_file(const char* filename)
+int parse_file(const char* filename, char * file_array)
 {
-    char* file_array = malloc(15000 * sizeof(char));
-    if (file_array == NULL)
-    {
-        printf("dnasearch::parse_file malloc for file_array failed \n");
-    }
 
     FILE* fileptr = fopen(filename, "r");
     if (fileptr == NULL)
@@ -39,6 +34,7 @@ char* parse_file(const char* filename)
             case 'g':
             case 'T':
             case 't':
+            // TODO: figure out why memcpy didn't work.
                 file_array[i] = cRet;
                 ++i;
                 break;
@@ -50,5 +46,5 @@ char* parse_file(const char* filename)
     }
 
     fclose(fileptr);
-    return file_array;
+    return 0;
 }
