@@ -13,7 +13,6 @@
 
 int parse_file(const char* filename, char * file_array)
 {
-
     FILE* fileptr = fopen(filename, "r");
     if (fileptr == NULL)
     {
@@ -50,6 +49,7 @@ int parse_file(const char* filename, char * file_array)
 
 int pattern_match(const char t[], int tlen, const char p[], int plen, int start_at)
 {
+    ++t;
     int match;
     for (int i = start_at; i < tlen; ++i)
     {
@@ -57,7 +57,7 @@ int pattern_match(const char t[], int tlen, const char p[], int plen, int start_
 
         for (int j = 0; j < plen; ++j)
         {
-            if (toupper(p[j]) != toupper(t[i+j]))
+            if (p[j] != t[i+j])
             {
                 match = 0;
                 break;
