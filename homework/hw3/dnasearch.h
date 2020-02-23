@@ -5,7 +5,8 @@
 #define DNASEARCH_H_
 
 /*
-    stores, in file_array, a character array containing every char in the file filename
+    Stores, in <file_array>, a character array containing every char in the file <filename>
+    returns non zero if error occured.
 */
 int parse_file(const char* filename, char* file_array);
 

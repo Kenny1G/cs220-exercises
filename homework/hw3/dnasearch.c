@@ -17,7 +17,7 @@ int parse_file(const char* filename, char * file_array)
     FILE* fileptr = fopen(filename, "r");
     if (fileptr == NULL)
     {
-        printf("dnasearch::parse_file error could not open file, %s", filename);
+        printf("dnasearch::parse_file error could not open file, %s \n", filename);
     }
 
     char cRet;
