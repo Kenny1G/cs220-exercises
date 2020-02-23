@@ -24,24 +24,27 @@ int main(int argc, char *argv[])
    iRet = parse_file(argv[1], dna_array);
    if (iRet != 0)
    {
-      printf("dnasearch.c::parse_file File was not parsed successfully \n");
+      if (iRet != 2)
+      {
+         printf("dnasearch.c::parse_file File was not parsed successfully \n");
+      }
       return 1;
    }
 
    // get patterns from user and find the matches
-   char pattern;
+   char pattern_char;
    int pattern_size = 0;
    int num_matches;
    char *user_pattern = malloc(15001 * sizeof(char));
-   while (scanf("%c", &pattern) != EOF)
+   while (scanf("%c", &pattern_char) != EOF)
    {
-      switch (toupper(pattern))
+      switch (toupper(pattern_char))
       {
       case 'A':
       case 'C':
       case 'G':
       case 'T':
-         user_pattern[pattern_size] = toupper(pattern);
+         user_pattern[pattern_size] = toupper(pattern_char);
          ++pattern_size;
          break;
       case ' ':
@@ -57,12 +60,12 @@ int main(int argc, char *argv[])
             {
                printf("%c", user_pattern[i]);
             }
-            int match_offset = pattern_match(dna_array, dna_array[0], user_pattern, pattern_size, 0);
+            int match_offset = pattern_match(dna_array, strlen(dna_array), user_pattern, pattern_size, 0);
             while (match_offset != -1)
             {
                printf(" %d ", match_offset);
                ++num_matches;
-               match_offset = pattern_match(dna_array, dna_array[0], user_pattern, pattern_size, match_offset + 1);
+               match_offset = pattern_match(dna_array, strlen(dna_array), user_pattern, pattern_size, match_offset + 1);
             }
             if (num_matches <= 0)
             {

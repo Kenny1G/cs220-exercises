@@ -22,7 +22,7 @@ int parse_file(const char* filename, char * file_array)
 
     char cRet;
     int iRet = fscanf(fileptr, " %c ", &cRet);
-    int i = 1;
+    int i = 0;
     while (iRet != EOF)
     { 
         switch(toupper(cRet))
@@ -31,9 +31,16 @@ int parse_file(const char* filename, char * file_array)
             case 'C':
             case 'G':
             case 'T':
-            // TODO: figure out why memcpy didn't work.
-                file_array[i] = cRet;
-                ++i;
+                if (i <= 15000)
+                {
+                    file_array[i] = cRet;
+                    ++i;
+                }
+                else
+                {
+                    printf("Invalid text \n");
+                    return 2;
+                }
                 break;
             default:
                 printf("Invalid text \n");
@@ -41,8 +48,11 @@ int parse_file(const char* filename, char * file_array)
         }
         iRet = fscanf(fileptr, " %c ", &cRet);
     }
-
-    file_array[0] = i;
+    if (i == 0 )
+    {
+        printf("Invalid text \n");
+        return 2;
+    }
     fclose(fileptr);
     return 0;
 }
@@ -50,7 +60,6 @@ int parse_file(const char* filename, char * file_array)
 
 int pattern_match(const char t[], int tlen, const char p[], int plen, int start_at)
 {
-    ++t;
     int match;
     for (int i = start_at; i < tlen; ++i)
     {
