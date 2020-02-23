@@ -15,9 +15,7 @@ I broke this homework into 4 parts
 ## Parse text file
 * Using a switch statemen, I built a character array consisting of every character in our text file that satisfied the requirements.
 * My parse_file method took in a pointer to an array of 15,001 chars. This is where it stored the created array
-* I learned the hard way that calling `sizeof(pointer)/sizeof(char)` on a pointer to an array always returns 8 Thus I decided to store the number of characters I've written to the array as the first element of the array
-* I got this idea from work were the first index of an array we are sending through a tcp stream is the size of the payload
-* looking back, I could probably have just written to the array and then written an extra `'\0'` at the end and found the size using strlen
+* I learned the hard way that calling `sizeof(pointer)/sizeof(char)` on a pointer always returned 8 so I calloc'd my array so that I can find the length of it using `strlen()`
 ---
 ## Get input from user
 * More or less just homework1
@@ -26,8 +24,7 @@ I broke this homework into 4 parts
 ---
 ## Find Occurrences.
 * my pattern_match is a pattern match with the pattern_match provided in the homework prompt
-* All I added was an increment to the pointer to the text array since my text array has the size as it's first element.
-* I also returned the offset rather than the total
+* I returned the offset rather than the total number of matches
 ---
 ## Spit it Out
 * At the time of writing this, my code is real time. i.e it spits the locations of the pattern immediately after the user types a space character.
