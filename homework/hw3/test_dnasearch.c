@@ -5,9 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 
-char* test_parse_file(const char* filename)
+char* test_parse_file(const char* filename, const char* expected)
 {
 
     char* actual = malloc(15001 * sizeof(char));
@@ -16,11 +17,9 @@ char* test_parse_file(const char* filename)
         printf("test_dnasearch::test_parse_file malloc for file_array failed \n");
     }
     parse_file(filename, actual);
-    
-    char expected[] = {'C','A','T','A','T','T','A','C','G','A','T','T','A','C','A'};
 
 
-    for (int i = 1; i < 16; i++)
+    for (int i = 1; (unsigned) i < strlen(expected); ++i)
     {
         assert(actual[i] == expected[i-1]);
         
@@ -43,7 +42,7 @@ int test_pattern_match(char *test_text, int lent, char* test_pattern, int lenp)
 }
 int main()
 {
-    char *array = test_parse_file("test.txt");
+    char *array = test_parse_file("test.txt", "CATATTACGATTACA");
 
     char test1[] = {'t', 'a', 'c'};
     assert(test_pattern_match(++array, array[0], test1, sizeof(test1)/sizeof(char)) == 2);
