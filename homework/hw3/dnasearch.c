@@ -57,7 +57,7 @@ int pattern_match(const char t[], int tlen, const char p[], int plen, int start_
 
         for (int j = 0; j < plen; ++j)
         {
-            if (p[j] != t[i+j])
+            if (toupper(p[j]) != toupper(t[i+j]))
             {
                 match = 0;
                 break;
