@@ -7,10 +7,10 @@
 #include <assert.h>
 
 
-void test_parse_file(const char* filename)
+char* test_parse_file(const char* filename)
 {
 
-    char* actual = malloc(15000 * sizeof(char));
+    char* actual = malloc(15001 * sizeof(char));
     if (actual == NULL)
     {
         printf("test_dnasearch::test_parse_file malloc for file_array failed \n");
@@ -20,14 +20,32 @@ void test_parse_file(const char* filename)
     char expected[] = {'C','A','T','A','T','T','A','C','G','A','T','T','A','C','A'};
 
 
-    for (int i = 0; i < 15; i++)
+    for (int i = 1; i < 16; i++)
     {
-        assert(actual[i] == expected[i]);
+        assert(actual[i] == expected[i-1]);
+        
     }
-    free(actual);
+    return actual;
+}
+
+int test_pattern_match(char *test_text, int lent, char* test_pattern, int lenp)
+{
+
+    int total_matches = 0;
+    int iRet = pattern_match(test_text, lent, test_pattern, lenp, 0);
+    while (iRet != -1)
+    {
+        printf(" %d ", iRet);
+        ++total_matches;
+        iRet = pattern_match(test_text, lent, test_pattern, lenp, iRet + 1);
+    }
+    return total_matches;
 }
 int main()
 {
-    test_parse_file("test.txt");
+    char *array = test_parse_file("test.txt");
+
+    char test1[] = {'t', 'a', 'c'};
+    assert(test_pattern_match(++array, array[0], test1, sizeof(test1)/sizeof(char)) == 2);
 }
 
