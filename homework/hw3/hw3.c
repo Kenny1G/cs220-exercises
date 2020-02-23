@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
       printf("Insufficient arguements; Usage: ./hw3 filename \n");
       return 1;
    }
-   char *dna_array = malloc(15001 * sizeof(char));
+   char *dna_array = calloc(15001, sizeof(char));
    if (dna_array == 0)
    {
       printf("hw3.c::main malloc for dna_array failed \n");

@@ -8,8 +8,6 @@
 #include <string.h>
 #include <ctype.h>
 
-//TODO: change this to return an int instead and pass an array
-// into it where it'll copy the characters to.
 
 int parse_file(const char* filename, char * file_array)
 {

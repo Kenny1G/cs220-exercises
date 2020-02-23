@@ -6,11 +6,14 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-
+/*
+    @param filename name of the file you want to parse
+    @param expected a c-string of the array you expect to get.
+*/
 char *test_parse_file(const char *filename, const char *expected)
 {
 
-    char *actual = calloc(150001, sizeof(char));
+    char *actual = calloc(15001, sizeof(char));
     if (actual == NULL)
     {
         printf("test_dnasearch::test_parse_file malloc for file_array failed \n");
@@ -23,20 +26,27 @@ char *test_parse_file(const char *filename, const char *expected)
     }
     return actual;
 }
-
-void test_pattern_match(char *test_text, int lent, char *test_pattern, int lenp, int expected[], int expectedl)
+/*
+    @param test_text the array from the text file
+    @param test_pattern the pattern you would like to find
+    @param expected your expected result an array of the offsets
+    @param expectedl how many results you'd like to test since we can't possible test all of them
+*/
+void test_pattern_match(char *test_text, char *test_pattern, int expected[], int expectedl)
 {
-    int actual[expectedl];
+    int actual[15000];
+    int lenp = strlen(test_pattern);
 
     int actual_index = 0;
-    int iRet = pattern_match(test_text, lent, test_pattern, lenp, 0);
+    int iRet = pattern_match(test_text, strlen(test_text), test_pattern, lenp, 0);
     while (iRet != -1)
     {
-        //printf(" %d ", iRet); sanity check
+        //printf(" %d ", iRet); //sanity check
         actual[actual_index] = iRet;
         ++actual_index;
-        iRet = pattern_match(test_text, lent, test_pattern, lenp, iRet + 1);
+        iRet = pattern_match(test_text, strlen(test_text), test_pattern, lenp, iRet + 1);
     }
+    //printf("\n"); // sanity check
     if (expectedl == 0)
     {
         assert(actual_index == 0);
@@ -53,28 +63,28 @@ int main()
 {
     char *array = test_parse_file("test.txt", "CATATTACGATTACA");
 
-    char test1[] = {'t', 'a', 'c'};
+    char test1[] = "tac";
     int expected[] = {5, 11};
-    test_pattern_match(array, strlen(array), test1, sizeof(test1) / sizeof(char), expected, 2);
+    test_pattern_match(array, test1, expected, 2);
 
-    char test2[] = {'a'};
+    char test2[] = "a";
     int expected2[] = {1, 3, 6, 9, 12, 14};
-    test_pattern_match(array, strlen(array), test2, sizeof(test2) / sizeof(char), expected2, 6);
+    test_pattern_match(array, test2, expected2, 6);
 
-    char test3[] = {'T', 'T', 'a'};
+    char test3[] = "TTa";
     int expected3[] = {4, 10};
-    test_pattern_match(array, strlen(array), test3, sizeof(test3) / sizeof(char), expected3, 2);
+    test_pattern_match(array, test3, expected3, 2);
 
-    char test4[] = {'g', 'C'};
-    test_pattern_match(array, strlen(array), test4, sizeof(test4) / sizeof(char), 0, 0);
+    char test4[] = "gc";
+    test_pattern_match(array, test4, 0, 0);
 
-    char test5[] = {'C','A','T','A','T','T','A','C'};
+    char test5[] = "catattac";
     int expected5[] = {0};
-    test_pattern_match(array, strlen(array), test5, sizeof(test5) / sizeof(char), expected5, 1);
+    test_pattern_match(array, test5, expected5, 1);
 
-    char test6[] = {'c', 'A', 't'};
+    char test6[] = "cat";
     int expected6[] = {0};
-    test_pattern_match(array, strlen(array), test6, sizeof(test6) / sizeof(char), expected6, 1);
+    test_pattern_match(array, test6, expected6, 1);
 
     printf("This is a message indicating successs \n");
 
