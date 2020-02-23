@@ -19,29 +19,29 @@ int main(int argc, char *argv[])
    char *dna_array = malloc(15001 * sizeof(char));
    if (dna_array == 0)
    {
-      printf("hw3::main malloc for dna_array failed \n");
+      printf("hw3.c::main malloc for dna_array failed \n");
    }
    iRet = parse_file(argv[1], dna_array);
    if (iRet != 0)
    {
-      printf("hw3::main parse_file error \n");
+      printf("dnasearch.c::parse_file File was not parsed successfully \n");
       return 1;
    }
 
-   // get patterns from user and match
-   char nucleotide;
+   // get patterns from user and find the matches
+   char pattern;
    int pattern_size = 0;
    int num_matches;
    char *user_pattern = malloc(15001 * sizeof(char));
-   while (scanf("%c", &nucleotide) != EOF)
+   while (scanf("%c", &pattern) != EOF)
    {
-      switch (toupper(nucleotide))
+      switch (toupper(pattern))
       {
       case 'A':
       case 'C':
       case 'G':
       case 'T':
-         user_pattern[pattern_size] = toupper(nucleotide);
+         user_pattern[pattern_size] = toupper(pattern);
          ++pattern_size;
          break;
       case ' ':
@@ -79,7 +79,6 @@ int main(int argc, char *argv[])
          printf("Invalid pattern \n");
          free(dna_array);
          free(user_pattern);
-
          return 2;
       }
    }
