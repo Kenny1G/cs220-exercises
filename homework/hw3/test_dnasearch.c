@@ -76,5 +76,7 @@ int main()
     int expected6[] = {0};
     test_pattern_match(array, (int)array[0], test6, sizeof(test6) / sizeof(char), expected6, 1);
 
+    printf("This is a message indicating successs \n");
+
     free(array);
 }
