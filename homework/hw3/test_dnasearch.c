@@ -31,7 +31,7 @@ char *test_parse_file(const char *filename, const char *expected)
     @param test_text the array from the text file
     @param test_pattern the pattern you would like to find
     @param expected your expected result an array of the offsets
-    @param expectedl how many results you'd like to test since we can't possible test all of them
+    @param expectedl how many length of output you'd like to test
 */
 void test_pattern_match(char *test_text, char *test_pattern, int expected[], int expectedl)
 {
@@ -62,7 +62,14 @@ void test_pattern_match(char *test_text, char *test_pattern, int expected[], int
 }
 int main()
 {
-    char *array = test_parse_file("text.txt", "CATATTACGATTACA");
+    FILE* fileptr = fopen("this_is_a_file_name_you_couldnt_possibly_have_on_your_computer.txt", "w");
+    if (fileptr == 0)
+    {
+        printf("test_dnasearch.c:main() failed to create file test.txt");
+    }
+    fprintf(fileptr, "CA TATTAC\nGATT ACA");
+    fclose(fileptr);
+    char *array = test_parse_file("this_is_a_file_name_you_couldnt_possibly_have_on_your_computer.txt", "CATATTACGATTACA");
 
     char test1[] = "tac";
     int expected[] = {5, 11};
@@ -72,10 +79,6 @@ int main()
     int expected2[] = {1, 3, 6, 9, 12, 14};
     test_pattern_match(array, test2, expected2, 6);
 
-    char test3[] = "TTa";
-    int expected3[] = {4, 10};
-    test_pattern_match(array, test3, expected3, 2);
-
     char test4[] = "gc";
     test_pattern_match(array, test4, 0, 0);
 
@@ -83,9 +86,8 @@ int main()
     int expected5[] = {0};
     test_pattern_match(array, test5, expected5, 1);
 
-    char test6[] = "cat";
-    int expected6[] = {0};
-    test_pattern_match(array, test6, expected6, 1);
+    char test7[] = "goat";
+    test_pattern_match(array, test7, 0, 0);
 
     printf("This is a message indicating successs \n");
 

@@ -19,7 +19,8 @@ int parse_file(const char* filename, char* file_array);
 int pattern_match(const char t[], int tlen, const char p[], int plen, int start_at);
 
 /*
-    Prints out the offset of the 
+    Prints out every offset where user_pattern of pattern_size matches dna_array
+    prints it to write_to
 */
 void show_match(FILE* write_to, int pattern_size, char* user_pattern, char* dna_array);
 
