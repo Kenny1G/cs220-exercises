@@ -76,26 +76,26 @@ int pattern_match(const char t[], int tlen, const char p[], int plen, int start_
     return -1;
 }
 
-void show_match(int pattern_size, char *user_pattern, char* dna_array)
+void show_match(FILE* write_to, int pattern_size, char *user_pattern, char* dna_array)
 {
     int num_matches = 0;
     for (int i = 0; i < pattern_size; ++i)
     {
-        printf("%c", user_pattern[i]);
+        fprintf(write_to,"%c", user_pattern[i]);
     }
     int match_offset = pattern_match(dna_array, strlen(dna_array), user_pattern, pattern_size, 0);
     while (match_offset != -1)
     {
-        printf(" %d ", match_offset);
+        fprintf(write_to," %d", match_offset);
         ++num_matches;
         match_offset = pattern_match(dna_array, strlen(dna_array), user_pattern, pattern_size, match_offset + 1);
     }
     if (num_matches <= 0)
     {
-        printf(" Not found\n");
+        fprintf(write_to," Not found\n");
     }
     else
     {
-        printf("\n");
+        fprintf(write_to,"\n");
     }
 }

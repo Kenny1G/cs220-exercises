@@ -4,6 +4,8 @@
 #ifndef DNASEARCH_H_
 #define DNASEARCH_H_
 
+#include <stdio.h>
+
 /*
     Stores, in <file_array>, a character array containing every char in the file <filename>
     returns non zero if error occured.
@@ -19,6 +21,6 @@ int pattern_match(const char t[], int tlen, const char p[], int plen, int start_
 /*
     Prints out the offset of the 
 */
-void show_match(int pattern_size, char* user_pattern, char* dna_array);
+void show_match(FILE* write_to, int pattern_size, char* user_pattern, char* dna_array);
 
 #endif //DNASEARCH_H_

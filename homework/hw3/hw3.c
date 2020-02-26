@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
          if (pattern_size > 0)
          {
             matched = 1;
-            show_match(pattern_size, user_pattern, dna_array);
+            show_match(stdout, pattern_size, user_pattern, dna_array);
             pattern_size = 0;
          }
          break;
@@ -71,8 +71,7 @@ int main(int argc, char *argv[])
 
    if (matched == 0)
    {
-      printf("\n");
-      show_match(pattern_size, user_pattern, dna_array);
+      show_match(stdout, pattern_size, user_pattern, dna_array);
    }
 
    free(dna_array);

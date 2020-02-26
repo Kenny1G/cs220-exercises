@@ -18,7 +18,8 @@ char *test_parse_file(const char *filename, const char *expected)
     {
         printf("test_dnasearch::test_parse_file malloc for file_array failed \n");
     }
-    parse_file(filename, actual);
+    int iRet = parse_file(filename, actual);
+    assert(iRet == 0);
 
     for (int i = 0; (unsigned)i < strlen(expected); ++i)
     {
@@ -61,7 +62,7 @@ void test_pattern_match(char *test_text, char *test_pattern, int expected[], int
 }
 int main()
 {
-    char *array = test_parse_file("test.txt", "CATATTACGATTACA");
+    char *array = test_parse_file("text.txt", "CATATTACGATTACA");
 
     char test1[] = "tac";
     int expected[] = {5, 11};
