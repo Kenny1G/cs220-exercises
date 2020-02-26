@@ -24,8 +24,20 @@ I broke this homework into 4 parts
 ---
 ## Find Occurrences.
 * my pattern_match is a pattern match with the pattern_match provided in the homework prompt
-* I returned the offset rather than the total number of matches
+* However, I returned the offset rather than the total number of matches
 ---
 ## Spit it Out
-* At the time of writing this, my code is real time. i.e it spits the locations of the pattern immediately after the user types a space character.
-* I do not know if I will have enough time to change this. I'll try later on.
+* Spitting it out is handled by a function show_match()
+* Originally this was in my main function but in order to show matches when the user enters ctrl + d before a space character, it had to be put in it's own function
+* My code shows matches in real time, i.e immediately a user hits a space character.
+* I considered ways of not having it be real time but didn't come up with anything sufficient
+---
+# Testing 
+* My tests are all automated
+* I create a file with an name I expect you wouldn't have on your computer so as to not overwrite anything 
+* I write to the file a lot of white space characters so I can make sure my parser parses correctly
+* I then use the array from this to test that my pattern_match produces adequate offsets for a host of different input arrays
+* I did not test max input or minimum input because the parsing of these is handled by my main funciton
+
+> Thank you.
+
