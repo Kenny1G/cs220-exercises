@@ -16,4 +16,9 @@ int parse_file(const char* filename, char* file_array);
  */
 int pattern_match(const char t[], int tlen, const char p[], int plen, int start_at);
 
+/*
+    Prints out the offset of the 
+*/
+void show_match(int pattern_size, char* user_pattern, char* dna_array);
+
 #endif //DNASEARCH_H_

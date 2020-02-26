@@ -34,10 +34,11 @@ int main(int argc, char *argv[])
    // get patterns from user and find the matches
    char pattern_char;
    int pattern_size = 0;
-   int num_matches;
+   int matched = 0;
    char *user_pattern = malloc(15001 * sizeof(char));
    while (scanf("%c", &pattern_char) != EOF)
    {
+      matched = 0;
       switch (toupper(pattern_char))
       {
       case 'A':
@@ -55,26 +56,8 @@ int main(int argc, char *argv[])
       case '\r':
          if (pattern_size > 0)
          {
-            num_matches = 0;
-            for (int i = 0; i < pattern_size; ++i)
-            {
-               printf("%c", user_pattern[i]);
-            }
-            int match_offset = pattern_match(dna_array, strlen(dna_array), user_pattern, pattern_size, 0);
-            while (match_offset != -1)
-            {
-               printf(" %d ", match_offset);
-               ++num_matches;
-               match_offset = pattern_match(dna_array, strlen(dna_array), user_pattern, pattern_size, match_offset + 1);
-            }
-            if (num_matches <= 0)
-            {
-               printf(" Not found\n");
-            }
-            else
-            {
-               printf("\n");
-            }
+            matched = 1;
+            show_match(pattern_size, user_pattern, dna_array);
             pattern_size = 0;
          }
          break;
@@ -84,6 +67,12 @@ int main(int argc, char *argv[])
          free(user_pattern);
          return 2;
       }
+   }
+
+   if (matched == 0)
+   {
+      printf("\n");
+      show_match(pattern_size, user_pattern, dna_array);
    }
 
    free(dna_array);
