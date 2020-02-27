@@ -77,7 +77,6 @@ int main(int argc, char *argv[])
 
    if (matched == 0 && pattern_size > 0)
    {
-      printf("\n");
       show_match(stdout, pattern_size, user_pattern, dna_array);
    }
 
