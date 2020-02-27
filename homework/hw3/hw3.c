@@ -77,13 +77,6 @@ int main(int argc, char *argv[])
 
    if (matched == 0 && pattern_size > 0)
    {
-      if (pattern_size > (int)strlen(dna_array))
-      {
-         printf("\nInvalid pattern \n");
-         free(dna_array);
-         free(user_pattern);
-         return 2;
-      }
       printf("\n");
       show_match(stdout, pattern_size, user_pattern, dna_array);
    }
