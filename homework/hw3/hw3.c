@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
       case 'G':
       case 'T':
          user_pattern[pattern_size] = toupper(pattern_char);
-         if (++pattern_size > (int) strlen(dna_array))
+         if (++pattern_size > (int)strlen(dna_array))
          {
             printf("Invalid pattern \n");
             free(dna_array);
@@ -77,6 +77,14 @@ int main(int argc, char *argv[])
 
    if (matched == 0 && pattern_size > 0)
    {
+      if (pattern_size > (int)strlen(dna_array))
+      {
+         printf("\nInvalid pattern \n");
+         free(dna_array);
+         free(user_pattern);
+         return 2;
+      }
+      printf("\n");
       show_match(stdout, pattern_size, user_pattern, dna_array);
    }
 
