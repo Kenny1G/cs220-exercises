@@ -50,18 +50,7 @@ void add_after(Node* cur, char value)
 //TODO: use recurison.
 void reverse_print(Node* cur)
 {
-  int i = length(cur);
-  int index = --i;
-  Node* seen[i];
-  while(cur != NULL)
-  {
-    seen[index] = cur;
-    cur = cur->next;
-    index--;
-  }
-  for (int x = 0; x < index; ++x)
-  {
-    printf("%c", seen[x]->data);
-  }
+  if (cur->next != NULL) reverse_print(cur->next);
+  printf("%c ", cur->data);
 }
 
