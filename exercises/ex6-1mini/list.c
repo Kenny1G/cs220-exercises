@@ -52,5 +52,6 @@ void reverse_print(Node* cur)
 {
   if (cur->next != NULL) reverse_print(cur->next);
   printf("%c ", cur->data);
+  
 }
 
