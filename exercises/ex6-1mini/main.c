@@ -24,25 +24,25 @@ int main() {
   // finished implementing the length function in list.c
   // don't forget to add function declaration in the header
 
-  // assert(length(n1) == 4);
+   assert(length(n1) == 4);
   
   // MINI EXERCISE PART 2: uncomment followings when you have
   // finished implementing the add_after function in list.c
   // don't forget to add function declaration in the header
   
-  // add_after (n1, 'B');
-  // add_after (n2, 'D');
-  // add_after (n3, 'F');
-  // assert(length(n1) == 7); // there must be 7 nodes now
-  // print(n1); // should now print A B C D E F G
-  // printf("\n");
+   add_after (n1, 'B');
+   add_after (n2, 'D');
+   add_after (n3, 'F');
+   assert(length(n1) == 7); // there must be 7 nodes now
+   print(n1); // should now print A B C D E F G
+   printf("\n");
 
   // MINI EXERCISE PART 3: uncomment following when you have
   // finished implementing the reverse_print function in list.c
   // don't forget to add function declaration in the header
   
-  // reverse_print(n1); // should now print G F E D C B A
-  // printf("\n");
+   reverse_print(n1); // should now print G F E D C B A
+   printf("\n");
   
   // don't forget to free the memory
   Node * prev;

@@ -21,3 +21,37 @@ void print(const Node * cur) {
   }
 }
 
+int length(const Node * cur)
+{
+  int i = 0;
+  while (cur!=NULL)
+  {
+    i++;
+    cur = cur->next;
+  }
+  return i;
+}
+
+void add_after(Node* cur, char value)
+{
+  Node *n = (Node *) malloc(sizeof(Node));
+  assert(n);
+  n->data = value;
+  if (cur->next == NULL)
+  {
+    n->next = NULL;
+  }
+  else
+  {
+    n->next = cur->next;
+  }
+  cur->next = n;
+}
+//TODO: use recurison.
+void reverse_print(Node* cur)
+{
+  if (cur->next != NULL) reverse_print(cur->next);
+  printf("%c ", cur->data);
+  
+}
+
