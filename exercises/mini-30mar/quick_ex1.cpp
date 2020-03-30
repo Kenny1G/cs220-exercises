@@ -13,6 +13,12 @@ void findWords(string str, int K)
     // using stringstream to break the string into tokens
     stringstream ss(str); // create a stringstream with content str
     // TODO: write code to find words in ss with a length greater
+	 while (ss >> word) {
+		 if (word.length() > (unsigned) K) {
+		 cout << word << endl;
+	 }
+	 }
+	 
     // than k and print them out
 }
 
