@@ -45,7 +45,7 @@ class LanguageModel
 		void display_ascend_alpha();
 		void display_descend_alpha();
 		void display_count_ordered();
-		void display_most_frequent();
+		void display_freq_third();
 
 		static bool count_sort(std::pair<std::string, int> &elem, std::pair<std::string, int> &elem2);
 };

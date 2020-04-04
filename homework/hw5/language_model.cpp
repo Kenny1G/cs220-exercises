@@ -21,7 +21,7 @@ bool LanguageModel::init(int argc, char **argv)
 
 	if (argc < 2)
 	{
-		std::cout << "Invalid file list: " << std::endl;
+		std::cerr << "Invalid file list: " << std::endl;
 		return false;
 	}
 
@@ -30,7 +30,7 @@ bool LanguageModel::init(int argc, char **argv)
 
 	if (argc < 3)
 	{
-		std::cout << "Invalid command: valid options are a, d, c, and f" << std::endl;
+		std::cerr << "Invalid command: valid options are a, d, c, and f" << std::endl;
 		return false;
 	}
 
@@ -45,7 +45,7 @@ bool LanguageModel::set_text(std::string list_filename)
 	std::ifstream list_file(list_filename);
 	if (!list_file.is_open())
 	{
-		std::cout << "Invalid file list: " << list_filename << std::endl;
+		std::cerr << "Invalid file list: " << list_filename << std::endl;
 		return false;
 	}
 
@@ -55,7 +55,7 @@ bool LanguageModel::set_text(std::string list_filename)
 		std::ifstream file_stream(filename);
 		if (!file_stream.is_open())
 		{
-			std::cout << "Invalid file: " << filename << std::endl;
+			std::cerr << "Invalid file: " << filename << std::endl;
 			continue;
 		}
 
@@ -85,7 +85,7 @@ bool LanguageModel::parse_command(int argc, char **argv)
 		cmnd = most_frequent;
 		if ((argc - 3) < 2)
 		{
-			std::cout << "Invalid argument list: f requires two additional command-line arguments" << std::endl;
+			std::cerr << "Invalid argument list: f requires two additional command-line arguments" << std::endl;
 			return false;
 		}
 		word1 = argv[3];
@@ -93,7 +93,7 @@ bool LanguageModel::parse_command(int argc, char **argv)
 	}
 	else
 	{
-		std::cout << "Invalid command: valid options are a, d, c, and f" << std::endl;
+		std::cerr << "Invalid command: valid options are a, d, c, and f" << std::endl;
 		return false;
 	}
 	return true;
@@ -135,6 +135,7 @@ void LanguageModel::display_model()
 			display_count_ordered();
 			break;
 		case most_frequent:
+			display_freq_third();
 			break;
 	}
 }
@@ -174,13 +175,32 @@ void LanguageModel::display_count_ordered()
 }
 
 
-bool LanguageModel::count_sort(std::pair<std::string, int> &elem, std::pair<std::string, int> &elem2)
+void LanguageModel::display_freq_third()
 {
-	if (elem.second != elem2.second) {
-		return elem.second > elem2.second;
-	} 
+	std::vector<std::pair<std::string, int>> matches; 
+	std::stringstream regex;
+	regex << "[" << word1 << " " << word2;
+	for (std::map<std::string, int>::iterator it = model.begin(); it != model.end(); ++it)
+	{
+		if (strncmp(it->first.c_str(), regex.str().c_str(),word1.length()+ word2.length() + 2) == 0)
+		{
+			matches.push_back(std::make_pair(it->first, it->second));
+		}
+	}
+	if (matches.empty())
+	{
+		std::cout << "No trigrams of the form [x y ?] appear" << std::endl;
+	}
 	else
 	{
-		return strcmp(elem.first.c_str(), elem2.first.c_str()) < 0;
+		std::sort(matches.begin(), matches.end(), count_sort);
+		std::cout << matches[0].second << " - " << matches[0].first << std::endl;
 	}
+}
+
+
+bool LanguageModel::count_sort(std::pair<std::string, int> &elem, std::pair<std::string, int> &elem2)
+{
+	if (elem.second != elem2.second) return elem.second > elem2.second;
+	return strcmp(elem.first.c_str(), elem2.first.c_str()) < 0;
 }
