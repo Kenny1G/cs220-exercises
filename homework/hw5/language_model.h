@@ -17,8 +17,8 @@ class LanguageModel
 
 		/* Populates all parameters needed to create a model */
 		bool init(int argc, char **argv);
-		bool create_model();
-		bool display_model();
+		void create_model();
+		void display_model();
 
 		
 	private:
@@ -30,7 +30,7 @@ class LanguageModel
 			count_ordered,
 			most_frequent
 		} cmnd;
-		std::map<int, std::string> model;
+		std::map<std::string, int> model;
 		std::vector<std::string> text;
 		std::string word1, word2;
 		
@@ -41,6 +41,11 @@ class LanguageModel
 
 
 		bool parse_command(int argc, char **argv);
+
+		void display_ascend_alpha();
+		void display_descend_alpha();
+		void display_count_ordered();
+		void display_most_frequent();
 };
 
 #endif //language_model.h

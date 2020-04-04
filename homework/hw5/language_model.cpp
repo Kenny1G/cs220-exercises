@@ -6,12 +6,13 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+#include <sstream>
 
 
 LanguageModel::LanguageModel():
+cmnd(none),
 word1(""),
-word2(""),
-cmnd(none)
+word2("")
 {}
 
 bool LanguageModel::init(int argc, char **argv)
@@ -25,11 +26,6 @@ bool LanguageModel::init(int argc, char **argv)
 
 	bool bRet = set_text(argv[1]); //bRet means boolean return
 	if (!bRet) return false;
-
-	for (std::vector<std::string>::iterator it = text.begin(); it != text.end(); ++it)
-	{
-		std::cout << *it << std::endl;
-	}
 
 	if (argc < 3)
 	{
@@ -80,10 +76,10 @@ bool LanguageModel::set_text(std::string list_filename)
 bool LanguageModel::parse_command(int argc, char **argv)
 {
 	std::string command(argv[2]);
-	if (command.compare("a") != 0) cmnd = ascend_alpha;
-	else if (command.compare("d") != 0 ) cmnd = descend_alpha;
-	else if (command.compare("c") != 0) cmnd = count_ordered;
-	else if (command.compare("f") != 0)
+	if (command.compare("a") == 0) cmnd = ascend_alpha;
+	else if (command.compare("d") == 0 ) cmnd = descend_alpha;
+	else if (command.compare("c") == 0) cmnd = count_ordered;
+	else if (command.compare("f") == 0)
 	{
 		cmnd = most_frequent;
 		if ((argc - 3) < 2)
@@ -103,3 +99,50 @@ bool LanguageModel::parse_command(int argc, char **argv)
 	
 }
 
+
+void LanguageModel::create_model()
+{
+	for (std::vector<std::string>::iterator it = text.begin(); it != text.end(); ++it)
+	{
+		// create trigram
+		std::stringstream trigram;
+		trigram << "[" << *it << " " << *(it + 1) << " " << *(it + 2) << "]";
+
+		std::map<std::string, int>::iterator mapit = model.find(trigram.str());
+		if (mapit == model.end()) model[trigram.str()] = 1;
+		else model[trigram.str()]++;
+	}
+
+	//removing unnecessary elements that only contain tags.
+	std::map<std::string, int>::iterator start = model.begin();
+	std::map<std::string, int>::iterator end = model.find("[<END_2> <START_1> <START_2>]");
+	model.erase(start,++end);
+
+
+}
+
+
+void LanguageModel::display_model()
+{
+	switch(cmnd)
+	{
+		case ascend_alpha:
+			display_ascend_alpha();
+			break;
+		case descend_alpha:
+			break;
+		case count_ordered:
+			break;
+		case most_frequent:
+			break;
+	}
+}
+
+
+void LanguageModel::display_ascend_alpha()
+{
+	for (std::map<std::string, int>::iterator it = model.begin(); it != model.end(); ++it)
+	{
+		std::cout << it->second << " - " << it->first << std::endl;
+	}
+}

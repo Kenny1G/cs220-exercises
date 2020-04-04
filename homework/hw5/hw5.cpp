@@ -10,4 +10,6 @@ int main(int argc, char **argv)
 
 	bool bRet = lm->init(argc, argv);
 	if (!bRet) return -1;
+	lm->create_model();
+	lm->display_model();
 }
