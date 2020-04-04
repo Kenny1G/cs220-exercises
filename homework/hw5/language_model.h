@@ -14,13 +14,15 @@ class LanguageModel
 		
 
 		LanguageModel();
+
+		/* Populates all parameters needed to create a model */
 		bool init(int argc, char **argv);
 		bool create_model();
 		bool display_model();
 
 		
 	private:
-		enum Commands
+		enum Commands // enum of possible commands because I like switches
 		{
 			none,
 			ascend_alpha,
@@ -32,8 +34,13 @@ class LanguageModel
 		std::vector<std::string> text;
 		std::string word1, word2;
 		
+		/* Writes the words from the files listed in list_filename to the vector text
+		 * Wraps words from each file with START and END tags
+		 */
 		bool set_text(std::string list_filename);
-		bool parse_command(std::string command);
+
+
+		bool parse_command(int argc, char **argv);
 };
 
 #endif //language_model.h
