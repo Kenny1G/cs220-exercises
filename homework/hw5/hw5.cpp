@@ -9,7 +9,11 @@ int main(int argc, char **argv)
 	LanguageModel *lm = new LanguageModel;
 
 	bool bRet = lm->init(argc, argv);
-	if (!bRet) return -1;
+	if (!bRet)
+	{
+		delete lm;
+		return -1;
+	}	
 	lm->create_model();
 	lm->display_model();
 

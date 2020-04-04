@@ -103,6 +103,7 @@ bool LanguageModel::parse_command(int argc, char **argv)
 
 void LanguageModel::create_model()
 {
+	if (text.size() == 0) return;
 	for (size_t i = 0; i < (text.size() - 2); ++i)
 	{
 		// create trigram
