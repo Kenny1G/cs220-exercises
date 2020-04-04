@@ -103,11 +103,12 @@ bool LanguageModel::parse_command(int argc, char **argv)
 
 void LanguageModel::create_model()
 {
-	for (std::vector<std::string>::iterator it = text.begin(); it != text.end(); ++it)
+	for (size_t i = 0; i < text.size(); ++i)
 	{
 		// create trigram
 		std::stringstream trigram;
-		trigram << "[" << *it << " " << *(it + 1) << " " << *(it + 2) << "]";
+		if (i + 1 < text.size())
+		trigram << "[" << text[i] << " " << text[i + 1] << " " << text[i+ 2] << "]";
 
 		std::map<std::string, int>::iterator mapit = model.find(trigram.str());
 		if (mapit == model.end()) model[trigram.str()] = 1;
@@ -137,6 +138,9 @@ void LanguageModel::display_model()
 		case most_frequent:
 			display_freq_third();
 			break;
+		default:
+			std::cout << "language_model.cpp:display_model() This shoudl never be hit";
+			return;
 	}
 }
 

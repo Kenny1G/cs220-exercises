@@ -12,4 +12,6 @@ int main(int argc, char **argv)
 	if (!bRet) return -1;
 	lm->create_model();
 	lm->display_model();
+
+	delete lm;
 }
