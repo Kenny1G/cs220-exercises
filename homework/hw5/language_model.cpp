@@ -108,7 +108,7 @@ void LanguageModel::create_model()
 		// create trigram
 		std::stringstream trigram;
 		if (i + 1 < text.size())
-		trigram << "[" << text[i] << " " << text[i + 1] << " " << text[i+ 2] << "]";
+		trigram << "[" << text[i] << " " << text[i + 1] << " " << text[i + 2] << "]";
 
 		std::map<std::string, int>::iterator mapit = model.find(trigram.str());
 		if (mapit == model.end()) model[trigram.str()] = 1;
