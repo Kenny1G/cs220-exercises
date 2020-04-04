@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string.h>
 #include <sstream>
+#include <algorithm>
 
 
 LanguageModel::LanguageModel():
@@ -128,8 +129,10 @@ void LanguageModel::display_model()
 			display_ascend_alpha();
 			break;
 		case descend_alpha:
+			display_descend_alpha();
 			break;
 		case count_ordered:
+			display_count_ordered();
 			break;
 		case most_frequent:
 			break;
@@ -156,5 +159,28 @@ void LanguageModel::display_descend_alpha()
 
 void LanguageModel::display_count_ordered()
 {
-	for ()
+	std::vector<std::pair<std::string, int>> inverse_model;
+	for (std::map<std::string, int>::iterator it = model.begin(); it != model.end(); ++it)
+	{
+		inverse_model.push_back( std::make_pair(it->first, it->second));
+	}
+
+	std::sort(inverse_model.begin(), inverse_model.end(), count_sort);
+
+	for (std::vector<std::pair<std::string, int>>::iterator inverse_it = inverse_model.begin(); inverse_it != inverse_model.end(); ++inverse_it)
+	{
+		std::cout << inverse_it->second << " - " << inverse_it->first << std::endl;
+	}
+}
+
+
+bool LanguageModel::count_sort(std::pair<std::string, int> &elem, std::pair<std::string, int> &elem2)
+{
+	if (elem.second != elem2.second) {
+		return elem.second > elem2.second;
+	} 
+	else
+	{
+		return strcmp(elem.first.c_str(), elem2.first.c_str()) < 0;
+	}
 }

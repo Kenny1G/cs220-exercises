@@ -30,7 +30,7 @@ class LanguageModel
 			count_ordered,
 			most_frequent
 		} cmnd;
-		std::vector<std::pair<std::string, int>> model;
+		std::map<std::string, int> model;
 		std::vector<std::string> text;
 		std::string word1, word2;
 		
@@ -46,6 +46,8 @@ class LanguageModel
 		void display_descend_alpha();
 		void display_count_ordered();
 		void display_most_frequent();
+
+		static bool count_sort(std::pair<std::string, int> &elem, std::pair<std::string, int> &elem2);
 };
 
 #endif //language_model.h
