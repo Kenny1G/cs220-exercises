@@ -104,8 +104,10 @@ bool LanguageModel::parse_command(int argc, char **argv)
 void LanguageModel::create_model()
 {
 	if (text.size() == 0) return;
-	for (size_t i = 0; i < (text.size() - 2); ++i)
+	for (size_t i = 0; i < text.size(); ++i)
 	{
+
+		if ((i+2) >= text.size() || (i+1) >= text.size()) break;
 		// create trigram
 		std::stringstream trigram;
 		trigram << "[" << text[i] << " " << text[i + 1] << " " << text[i + 2] << "]";
