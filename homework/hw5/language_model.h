@@ -30,7 +30,7 @@ class LanguageModel
 			count_ordered,
 			most_frequent
 		} cmnd;
-		std::map<std::string, int> model;
+		std::vector<std::pair<std::string, int>> model;
 		std::vector<std::string> text;
 		std::string word1, word2;
 		

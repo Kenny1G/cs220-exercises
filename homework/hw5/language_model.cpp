@@ -117,8 +117,6 @@ void LanguageModel::create_model()
 	std::map<std::string, int>::iterator start = model.begin();
 	std::map<std::string, int>::iterator end = model.find("[<END_2> <START_1> <START_2>]");
 	model.erase(start,++end);
-
-
 }
 
 
@@ -145,4 +143,18 @@ void LanguageModel::display_ascend_alpha()
 	{
 		std::cout << it->second << " - " << it->first << std::endl;
 	}
+}
+
+void LanguageModel::display_descend_alpha()
+{
+	for (std::map<std::string, int>::reverse_iterator rit = model.rbegin(); rit != model.rend(); ++rit)
+	{
+		std::cout << rit->second << " - " << rit->first << std::endl;
+	}
+}
+
+
+void LanguageModel::display_count_ordered()
+{
+	for ()
 }

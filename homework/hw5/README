@@ -1,2 +1,26 @@
 name: Kenneth Oseleononmen
 ID:   KOSELEO1
+
+# Overview
+This project was broken down into 4 parts
+- parsing input file
+- parsing user command
+- creating the language model
+- displaying the model
+
+
+## Parsing Input File 
+I opted to input my file values into a vector of strings wrapping the strings from each file in the START and END tags.
+
+## Parsing User Command
+I wrote a simple function that populates the variables of my LanguageModel class based off the input provided by the user
+
+## Creating the LanguageModel
+I started with a map as my data structure for the model but quickly realized this led to unnecessary problems when displaying
+for the different commands. Thus, I went with a vector of pairs instead. I noticed that, because I add my START and END tags 
+when I parsed the files I always had 4 extra trigrams at the top when my model was ordered lexographically, thus I ordered my
+model in that way to begin with and deleted the first four elements.
+
+## Displaying the Model 
+With my model ordered lexographically after creation, the ascending and descending alphabetical representations
+were very easy and simply a matter of iterating over and printing.
