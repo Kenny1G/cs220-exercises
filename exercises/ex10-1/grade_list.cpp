@@ -31,16 +31,15 @@ GradeList::GradeList(int capacity): grades(new double[capacity]),
 // resize it by doubling its length. Do not use realloc!
 void GradeList::add(double grade)
 {
-	if (capacity >= count) {
+	if (capacity <= count) {
 		capacity *= 2;
 		double *pRet = new double[capacity];
-		memcpy(pRet, grades, capacity/2);
+		memcpy(pRet, grades, (capacity/2) * sizeof(double));
 		delete[] grades;
 		grades = pRet;
 	}
-	else {
 		grades[count] = grade;
-	}
+	count++;
 }
 
 
@@ -50,7 +49,7 @@ void GradeList::add(double grade)
 void GradeList::add(int howmany, double * grades)
 {
 	for (int i = 0; i < howmany; ++i) {
-		GradeList::grades[count + i] = grades[i];
+		this->add(grades[i]);
 	}
 }
 
@@ -58,6 +57,13 @@ void GradeList::add(int howmany, double * grades)
 
 // TODO: write a function (in grade_list.cpp) to clear the list
 // of all values, making the array as small as possible
+void GradeList::clear()
+{
+	delete[] grades;
+	grades = new double[1];
+	capacity = 1;
+	count = 0;
+}
 
 
 
