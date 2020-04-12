@@ -68,7 +68,11 @@ bool CTree::addChild(char ch)
 
 bool CTree::addChild(CTree *root)
 {
-	if (nullptr != root->prev || nullptr != root->sibs) return false;
+	if (nullptr != root->prev || nullptr != root->sibs) 
+	{
+		delete root;
+		return false;
+	}
 
 	if (nullptr == this->kids)
 	{
@@ -107,8 +111,11 @@ bool CTree::addSibling(char ch)
 
 bool CTree::addSibling(CTree *root)
 {
-	if (nullptr == this->prev) return false;
-	if (root->data == this->data) return false;
+	if (nullptr == this->prev || root->data == this->data)
+	{
+		delete root;
+		return false;
+	} 
 
 	if (root->data < this->data)
 	{
