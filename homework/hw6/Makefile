@@ -9,7 +9,7 @@ cTreeTest: CTree.o cTreeTest.o
 tTreeTest: tTreeTest.o
 	$(CC) $(FLAGS) tTreeTest.o -o tTreeTest
 
-tTreeTest.o: TTreeTest.cpp Tree.h
+tTreeTest.o: TTreeTest.cpp Tree.h Tree.inc
 	$(CC) $(FLAGS) -c TTreeTest.cpp
 
 cTreeTest.o: CTreeTest.cpp  CTree.h

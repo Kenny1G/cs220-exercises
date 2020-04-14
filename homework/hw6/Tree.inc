@@ -1,7 +1,6 @@
 //Kenneth Oseleononmen
 //koseleo1
 
-#include "Tree.h"
 #include <sstream>
 
 template<typename T>
